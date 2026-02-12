@@ -1,51 +1,106 @@
+"use client";
+
+import { Suspense } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, ShoppingCart, Sun, Moon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
+import { Product } from "@/types";
 import { products } from "@/lib/data";
-import { ProductCard } from "@/components/product/ProductCard";
+import { BentoGrid } from "@/components/home/BentoGrid";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
+  hover: { scale: 1.015, transition: { type: "spring", stiffness: 400, damping: 30 } }
+} as const;
+
+const glowVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 0 },
+  hover: { opacity: 1, transition: { duration: 0.3, ease: "easeOut" } }
+} as const;
+
+import { CategoryStrip } from "@/components/home/CategoryStrip";
+
+
 
 export default function Home() {
+  const { setTheme, theme } = useTheme();
+  // Ensure we have a default for cart to avoid hydration mismatch if possible, 
+  // but simpler to just use the hook. 
+  // Note: LocalStorage persistence might cause hydration mismatch on first render.
+  // Ideally use a 'mounted' check for separate rendering.
+  const cartItems = useCart((state) => state.items);
+  const featuredProduct = products.find(p => p.category === "appliances") || products[0];
   return (
-    <div className="flex flex-col gap-16 pb-16">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-muted/20 py-24 lg:py-32">
-        <div className="container relative z-10 flex flex-col items-center text-center gap-6">
-          <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
-            Now Delivering to All Lebanon
+    <div className="p-4 md:p-12 lg:p-16 2xl:px-24 flex flex-col justify-center w-full max-w-[2560px] mx-auto space-y-12 md:space-y-16">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[85dvh]"
+      >
+        {/* Top (Large): Hero/Featured Product - Spans full width now */}
+        <motion.div variants={item} whileHover="hover" className="md:col-span-3 glass-panel relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between group cursor-pointer min-h-[600px] shadow-smooth">
+          <motion.div variants={glowVariants} className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent z-0 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-50" />
+          <div className="relative z-10">
+            <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold tracking-widest uppercase text-primary mb-4 shadow-smooth">
+              Featured Arrival
+            </div>
+            <h1 className="font-heading font-bold max-w-lg leading-tight text-white mb-4 tracking-tight drop-shadow-xl"
+              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}>
+              {featuredProduct.name}
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-md font-medium leading-relaxed">
+              {featuredProduct.description}
+            </p>
+            <div className="mt-8 relative z-20">
+              <Link href="/products">
+                <Button size="lg" magnetic sheen className="rounded-full px-8 font-bold tracking-wide shadow-smooth cursor-pointer">
+                  Shop Now <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl max-w-3xl font-heading">
-            Premium Electronics. <br className="hidden sm:inline" />
-            <span className="text-primary">Industrial Grade.</span>
-          </h1>
-          <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            The anti-basic store for those who know quality. Routers, UPS, Appliances, and Tools. Cash on Delivery supported.
-          </p>
-          <div className="flex gap-4">
-            <Button size="lg" className="gap-2">
-              Shop Now <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button size="lg" variant="outline">
-              View Catalog
-            </Button>
+          <div className="absolute right-[-5%] bottom-[-10%] w-[60%] h-[100%] transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+            <Image
+              src={featuredProduct.image}
+              alt={featuredProduct.name}
+              fill
+              className="object-contain drop-shadow-2xl"
+              priority={true}
+              sizes="(max-width: 768px) 100vw, 60vw"
+            />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Background Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10" />
-      </section>
+      </motion.div>
 
-      {/* Product Grid */}
-      <section id="catalog" className="container">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold font-heading">Featured Collection</h2>
-          <Button variant="link" className="text-primary">View all</Button>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+
+      {/* Category Strip "Orange Pill" */}
+      <Suspense fallback={<div className="h-20 w-full" />}>
+        <CategoryStrip />
+      </Suspense>
+
+      {/* Brand Showcase Section */}
+      <BentoGrid />
+
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { GrainOverlay } from "@/components/GrainOverlay";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -11,8 +14,16 @@ export const metadata: Metadata = {
   description: "The Anti-Basic E-Commerce Experience.",
 };
 
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false, // Prevent accidental zooming on mobile which breaks app-like feel
+};
+
+import { LayoutIntelligence } from "@/components/ui/LayoutIntelligence";
+import { CommandPalette } from "@/components/ui/CommandPalette";
+import { UserIntentProvider } from "@/lib/context/UserIntentContext";
 
 export default function RootLayout({
   children,
@@ -20,15 +31,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
+      <head>
+        <link rel="preload" as="image" href="/hero-image.webp" />
+      </head>
       <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground font-sans flex flex-col min-h-screen`}
+        className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground font-sans flex flex-col min-h-screen overflow-x-hidden`}
       >
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <LayoutIntelligence>
+          <UserIntentProvider>
+            <main className="flex-1 relative z-10 w-full">
+              {children}
+            </main>
+            <Header />
+            <Footer />
+            <GrainOverlay />
+            <CommandPalette>
+              <span />
+            </CommandPalette>
+          </UserIntentProvider>
+        </LayoutIntelligence>
         <Toaster />
       </body>
     </html>
