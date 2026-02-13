@@ -1,12 +1,12 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, LayoutGroup } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useUserIntent } from "@/lib/context/UserIntentContext";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 // Flagship Brand Data
@@ -118,17 +118,21 @@ export function BentoGrid() {
             </div>
 
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[minmax(300px,auto)] grid-flow-dense relative">
-                <AnimatePresence mode="popLayout">
-                    {sortedBrands.map((brand, index) => (
-                        <BrandCard key={brand.id} brand={brand} index={index} />
-                    ))}
-                </AnimatePresence>
+                <LayoutGroup>
+                    <AnimatePresence mode="popLayout">
+                        {sortedBrands.map((brand, index) => (
+                            <BrandCard key={brand.id} brand={brand} index={index} />
+                        ))}
+                    </AnimatePresence>
+                </LayoutGroup>
             </motion.div>
         </section>
     );
 }
 
 function BrandCard({ brand, index }: { brand: typeof brands[0], index: number }) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     // 3D Tilt Physics
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -139,26 +143,8 @@ function BrandCard({ brand, index }: { brand: typeof brands[0], index: number })
     const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
     const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
 
-    // Parallax Depth (Simulated Multi-Plane)
-    // We want odd items to move slightly differently than even ones to create "depth"
-    // Since we are inside a map, we can't easily use global scroll without passing ref.
-    // However, we can just give a subtle floating animation or assume global scroll if acceptable.
-    // Framer's useScroll() works anywhere.
-    // Let's modify the card to accept scroll progress if passed, OR just use valid CSS parallax? 
-    // No, framer useScroll is best.
-
-    // Actually, simply adding a "float" animation is safer than complex scroll parallax inside a component without context.
-    // User requested "Multi-plane Scroll Depth".
-    // "if you have 3 columns... middle column translate Y slower".
-    // Since we are in a grid, not columns, this is hard.
-    // I will stick to the Shimmer + 3D Tilt for now as "Industrial Luxury" and maybe skip complex Parallax unless I refactor the grid structure.
-    // Wait, I can just use a random `y` start offset or speed?
-    // Let's skip the heavy parallax logic to avoid breaking the grid layout, but ensure the "Tactile" feel is perfect.
-    // I will add Micro-Squish here too.
-
-
-
     function handleMouse(event: React.MouseEvent<HTMLDivElement>) {
+        if (isExpanded) return;
         const rect = event.currentTarget.getBoundingClientRect();
         const width = rect.width;
         const height = rect.height;
@@ -177,66 +163,119 @@ function BrandCard({ brand, index }: { brand: typeof brands[0], index: number })
 
     return (
         <motion.div
+            layoutId={`card-${brand.id}`}
+            onClick={() => setIsExpanded(!isExpanded)}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-                duration: 0.5,
-                delay: index * 0.1,
-                type: "spring", stiffness: 300, damping: 30
+            animate={{
+                opacity: 1,
+                y: 0,
+                zIndex: isExpanded ? 50 : 1,
+                position: isExpanded ? 'fixed' : 'relative',
+                top: isExpanded ? 0 : 'auto',
+                left: isExpanded ? 0 : 'auto',
+                width: isExpanded ? '100vw' : '100%',
+                height: isExpanded ? '100vh' : 'auto',
+                borderRadius: isExpanded ? 0 : '1.5rem',
             }}
-            whileTap={{ scale: 0.98 }}
+            transition={{
+                layout: { duration: 0.6, type: "spring", damping: 25, stiffness: 40 },
+                opacity: { duration: 0.5 }
+            }}
             style={{
-                rotateX,
-                rotateY,
+                rotateX: isExpanded ? 0 : rotateX,
+                rotateY: isExpanded ? 0 : rotateY,
                 perspective: 1000,
                 transformStyle: "preserve-3d"
             }}
             onMouseMove={handleMouse}
             onMouseLeave={handleMouseLeave}
             className={cn(
-                "group relative overflow-hidden rounded-3xl cursor-pointer min-h-[300px]",
-                brand.colSpan,
-                (brand as any).rowSpan, // Cast to any because TS might complain if I don't update the type definition in the props, but actually I can just access it if I update the type above or just treat it as safe. Let's assume loose typing for now or better, update the type. 
-                // Wait, brand is `typeof brands[0]`. brands[0] now has rowSpan. So it should be fine.
-                brand.bgStyle
+                "group relative overflow-hidden cursor-pointer",
+                !isExpanded && "min-h-[300px] rounded-3xl",
+                !isExpanded && brand.colSpan,
+                !isExpanded && (brand as any).rowSpan,
+                brand.bgStyle,
+                isExpanded && "z-50 inset-0 flex items-center justify-center bg-black"
             )}
         >
-            <Link href={brand.href} className="block w-full h-full relative">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src={brand.image}
-                        alt={brand.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
-                        priority={index < 2}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+            <div className="relative w-full h-full">
+                {/* Close Button if Expanded */}
+                {isExpanded && (
+                    <button
+                        className="absolute top-8 right-8 z-50 p-4 bg-black/50 rounded-full text-white backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsExpanded(false);
+                        }}
+                    >
+                        CLOSE PROTOCOL
+                    </button>
+                )}
 
-                    {/* Spotlight Shimmer */}
-                    <div className="absolute inset-0 z-10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
-                </div>
+                <Link href={isExpanded ? '#' : brand.href} className="block w-full h-full relative" onClick={e => isExpanded && e.preventDefault()}>
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src={brand.image}
+                            alt={brand.name}
+                            fill
+                            className={cn(
+                                "object-cover transition-transform duration-700 opacity-60",
+                                !isExpanded && "group-hover:scale-110 group-hover:opacity-40",
+                                isExpanded && "scale-100 opacity-30"
+                            )}
+                            priority={index < 2}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-                {/* Content Overlay */}
-                <div className="relative z-10 w-full h-full flex flex-col justify-end p-8" style={{ transform: "translateZ(20px)" }}>
-                    <div className="mb-4">
-                        <h3 className="text-3xl md:text-4xl font-bold tracking-widest uppercase text-white/90 drop-shadow-xl font-heading shadow-smooth">
-                            {brand.name}
-                        </h3>
-                        <div className="h-1 w-12 bg-primary rounded-full mt-2 group-hover:w-24 transition-all duration-300 shadow-smooth" />
+                        {/* Spotlight Shimmer */}
+                        {!isExpanded && (
+                            <div className="absolute inset-0 z-10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+                        )}
                     </div>
 
-                    <div className="glass-panel px-4 py-3 rounded-xl inline-flex items-center justify-between border-white/10 bg-white/5 backdrop-blur-md shadow-smooth">
-                        <span className="text-sm md:text-base font-medium text-slate-200 tracking-wide">
-                            {brand.flagship}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-primary ml-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                </div>
+                    {/* Content Overlay */}
+                    <motion.div
+                        layout="position"
+                        className={cn("relative z-10 w-full h-full flex flex-col justify-end p-8", isExpanded && "p-24 justify-center items-center text-center")}
+                        style={{ transform: "translateZ(20px)" }}
+                    >
+                        <div className="mb-4">
+                            <motion.h3 layout="position" className={cn("font-bold tracking-widest uppercase text-white/90 drop-shadow-xl font-heading shadow-smooth", isExpanded ? "text-8xl" : "text-3xl md:text-4xl")}>
+                                {brand.name}
+                            </motion.h3>
+                            <motion.div layout className={cn("h-1 bg-primary rounded-full mt-2 transition-all duration-300 shadow-smooth", isExpanded ? "w-32 mx-auto" : "w-12 group-hover:w-24")} />
+                        </div>
 
-                {/* Shine Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 skew-x-12 translate-x-[-200%] group-hover:animate-shine pointer-events-none" />
-            </Link>
+                        <motion.div layout className="glass-panel px-4 py-3 rounded-xl inline-flex items-center justify-between border-white/10 bg-white/5 backdrop-blur-md shadow-smooth">
+                            <span className="text-sm md:text-base font-medium text-slate-200 tracking-wide">
+                                {brand.flagship}
+                            </span>
+                            {!isExpanded && <ArrowRight className="w-4 h-4 text-primary ml-4 group-hover:translate-x-1 transition-transform" />}
+                        </motion.div>
+
+                        {isExpanded && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className="mt-8"
+                            >
+                                <Link href={brand.href}>
+                                    <button className="px-8 py-4 bg-cyan-500 text-black font-bold rounded-full hover:bg-cyan-400 transition-colors shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+                                        INITIATE NEURAL LINK
+                                    </button>
+                                </Link>
+                            </motion.div>
+                        )}
+                    </motion.div>
+
+                    {/* Shine Effect */}
+                    {!isExpanded && (
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 skew-x-12 translate-x-[-200%] group-hover:animate-shine pointer-events-none" />
+                    )}
+                </Link>
+            </div>
         </motion.div>
     );
 }

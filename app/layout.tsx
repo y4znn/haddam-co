@@ -22,7 +22,7 @@ export const viewport = {
 };
 
 import { LayoutIntelligence } from "@/components/ui/LayoutIntelligence";
-import { CommandPalette } from "@/components/ui/CommandPalette";
+import { CommandMenu } from "@/components/ui/CommandMenu";
 import { UserIntentProvider } from "@/lib/context/UserIntentContext";
 
 export default function RootLayout({
@@ -46,9 +46,7 @@ export default function RootLayout({
             <Header />
             <Footer />
             <GrainOverlay />
-            <CommandPalette>
-              <span />
-            </CommandPalette>
+            <CommandMenu />
           </UserIntentProvider>
         </LayoutIntelligence>
         <Toaster />
