@@ -59,7 +59,15 @@
   /* Industrial Luxury Tokens */
   --color-brand-orange: var(--orbital-ice);
   --color-glass-surface: var(--slate-glass);
+  --color-glass-surface: var(--slate-glass);
   --color-glass-border: var(--border-glass);
+
+  /* PALETTE HIJACK: Force 'orange' classes to render as Cyan */
+  --color-orange-500: var(--orbital-ice);
+  --color-orange-600: #06b6d4;
+  /* cyan-600 equivalent */
+  --color-orange-400: #22d3ee;
+  /* cyan-400 equivalent */
 
   --shadow-neon-glow: 0 0 40px -10px rgba(255, 107, 0, 0.4);
   /* "Radioactive" Glow */
