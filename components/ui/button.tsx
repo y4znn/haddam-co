@@ -12,7 +12,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-cyan-500 text-black font-bold hover:bg-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.5)] hover:shadow-[0_0_20px_#00F0FF] hover:scale-105 active:scale-95 transition-all duration-300",
+        default: "bg-cyan-500 text-black font-bold hover:bg-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.5)] hover:shadow-[0_0_20px_#00F0FF] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 focus-visible:ring-destructive/40 bg-destructive/60",
         outline:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         glass: "bg-black/20 border border-white/10 backdrop-blur-md text-white hover:bg-white/10 hover:border-white/20",
-        solid: "bg-cyan-500 text-black font-bold hover:bg-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.5)] hover:shadow-[0_0_20px_#00F0FF] hover:scale-105 active:scale-95 transition-all duration-300",
+        solid: "bg-cyan-500 text-black font-bold hover:bg-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.5)] hover:shadow-[0_0_20px_#00F0FF] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

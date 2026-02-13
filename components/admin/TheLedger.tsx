@@ -15,7 +15,7 @@ export function TheLedger({ orders }: TheLedgerProps) {
             {/* Terminal Header */}
             <div className="px-6 py-4 border-b border-white/10 bg-white/5 flex items-center justify-between">
                 <h3 className="font-heading font-bold text-sm tracking-widest text-muted-foreground uppercase flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-brand-core animate-pulse" />
                     Live Ledger
                 </h3>
                 <span className="text-[10px] text-muted-foreground/50">ENCRYPTED CONNECTION</span>
@@ -32,10 +32,10 @@ export function TheLedger({ orders }: TheLedgerProps) {
                         className="group flex flex-col md:flex-row md:items-center gap-2 md:gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 cursor-pointer relative overflow-hidden"
                     >
                         {/* Hover Highlight Line */}
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-orange opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-core opacity-0 group-hover:opacity-100 transition-opacity" />
 
                         {/* ID */}
-                        <div className="w-24 shrink-0 text-xs text-brand-orange font-bold">
+                        <div className="w-24 shrink-0 text-xs text-brand-core font-bold">
                             {order.id}
                         </div>
 

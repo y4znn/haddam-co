@@ -11,6 +11,8 @@ import { useCart } from "@/hooks/use-cart";
 import { Product } from "@/types";
 import { products } from "@/lib/data";
 import { BentoGrid } from "@/components/home/BentoGrid";
+import { ReactorCore } from "@/components/industrial/ReactorCore";
+import { LevitatingCard } from "@/components/motion/LevitatingCard";
 
 const container = {
   hidden: { opacity: 0 },
@@ -55,39 +57,40 @@ export default function Home() {
         className="grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[85dvh]"
       >
         {/* Top (Large): Hero/Featured Product - Spans full width now */}
-        <motion.div variants={item} whileHover="hover" className="md:col-span-3 glass-panel relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between group cursor-pointer min-h-[600px] shadow-smooth border border-cyan-400/30 hover:border-cyan-400/60 transition-colors">
-          <motion.div variants={glowVariants} className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent z-0 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050B14] via-[#0F172A] to-[#00F0FF]/10 opacity-80" />
-          <div className="relative z-10">
-            <div className="inline-flex items-center rounded-full border border-cyan-400/50 bg-cyan-950/30 px-3 py-1 text-xs font-bold tracking-widest uppercase text-cyan-400 mb-4 shadow-[0_0_10px_rgba(34,211,238,0.2)] animate-pulse">
-              Featured Arrival
-            </div>
-            <h1 className="font-heading font-bold max-w-lg leading-tight text-white mb-4 tracking-tight drop-shadow-xl"
-              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}>
-              {featuredProduct.name}
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-md font-medium leading-relaxed">
-              {featuredProduct.description}
-            </p>
-            <div className="mt-8 relative z-20">
+        <LevitatingCard className="md:col-span-3 h-full">
+          <motion.div variants={item} whileHover="hover" className="h-full glass-panel relative overflow-hidden rounded-2xl p-0 flex flex-col md:flex-row group shadow-smooth border border-cyan-400/30 hover:border-cyan-400/60 transition-colors bg-[#050B14]">
+            {/* Content Side */}
+            <div className="relative z-10 p-8 md:p-12 flex flex-col justify-center w-full md:w-1/2">
+              <motion.div variants={glowVariants} className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent z-0 pointer-events-none" />
+
+              <div className="inline-flex items-center self-start rounded-full border border-cyan-400/50 bg-cyan-950/30 px-3 py-1 text-xs font-bold tracking-widest uppercase text-cyan-400 mb-6 shadow-[0_0_10px_rgba(34,211,238,0.2)] animate-pulse">
+                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
+                System Online
+              </div>
+
+              <h1 className="font-heading font-bold leading-none text-white mb-6 tracking-tight drop-shadow-xl"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+                INDUSTRIAL<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">LUXURY</span>
+              </h1>
+
+              <p className="text-lg text-muted-foreground/80 font-medium leading-relaxed max-w-md mb-8">
+                Experience the next generation of appliance architecture. Engineered for zero-gravity environments.
+              </p>
+
               <Link href="/products">
-                <Button size="lg" magnetic sheen className="rounded-full px-8 font-bold tracking-wide shadow-smooth cursor-pointer bg-cyan-500 text-black hover:shadow-[0_0_20px_#00F0FF]">
-                  Shop Now <ArrowRight className="ml-2 w-4 h-4" />
+                <Button size="lg" className="rounded-full px-8 font-bold tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.3)] bg-cyan-500 text-black hover:bg-cyan-400 hover:scale-105 transition-all duration-300">
+                  Initialize Sequence <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
             </div>
-          </div>
-          <div className="absolute right-[-5%] bottom-[-10%] w-[60%] h-[100%] transition-transform duration-700 group-hover:scale-105 pointer-events-none">
-            <Image
-              src={featuredProduct.image}
-              alt={featuredProduct.name}
-              fill
-              className="object-contain drop-shadow-2xl"
-              priority={true}
-              sizes="(max-width: 768px) 100vw, 60vw"
-            />
-          </div>
-        </motion.div>
+
+            {/* Reactor Side */}
+            <div className="relative w-full md:w-1/2 h-[500px] md:h-auto border-l border-white/5">
+              <ReactorCore />
+            </div>
+          </motion.div>
+        </LevitatingCard>
 
       </motion.div>
 

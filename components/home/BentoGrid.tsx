@@ -55,7 +55,7 @@ const brands = [
         image: "https://images.unsplash.com/photo-1584949514785-5b8d2b704c34?q=80&w=2070&auto=format&fit=crop", // Cooking
         href: "/products?brand=Tefal",
         colSpan: "md:col-span-1",
-        bgStyle: "bg-red-950/30", // Hint of red brand color
+        bgStyle: "bg-purple-950/30", // Reactor Purple hint
     },
     {
         id: "sharp",
@@ -110,13 +110,14 @@ export function BentoGrid() {
                             exit={{ opacity: 0, x: -10 }}
                             className="flex items-center gap-2"
                         >
-                            <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
+                            <span className="w-2 h-2 rounded-full bg-brand-core animate-pulse" />
                             ADAPTING TO: {intent} PROTOCOL
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
 
+            {/* Enhanced Grid with Bento Geometry */}
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[minmax(300px,auto)] grid-flow-dense relative">
                 <LayoutGroup>
                     <AnimatePresence mode="popLayout">
@@ -140,8 +141,8 @@ function BrandCard({ brand, index }: { brand: typeof brands[0], index: number })
     const mouseX = useSpring(x, { stiffness: 400, damping: 30 });
     const mouseY = useSpring(y, { stiffness: 400, damping: 30 });
 
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"]); // Reduced tilt for stability
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]);
 
     function handleMouse(event: React.MouseEvent<HTMLDivElement>) {
         if (isExpanded) return;
@@ -181,6 +182,12 @@ function BrandCard({ brand, index }: { brand: typeof brands[0], index: number })
                 layout: { duration: 0.6, type: "spring", damping: 25, stiffness: 40 },
                 opacity: { duration: 0.5 }
             }}
+            whileHover={!isExpanded ? {
+                scale: 1.05,
+                rotateX: 5,
+                rotateY: 5,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+            } : {}}
             style={{
                 rotateX: isExpanded ? 0 : rotateX,
                 rotateY: isExpanded ? 0 : rotateY,
@@ -190,8 +197,9 @@ function BrandCard({ brand, index }: { brand: typeof brands[0], index: number })
             onMouseMove={handleMouse}
             onMouseLeave={handleMouseLeave}
             className={cn(
-                "group relative overflow-hidden cursor-pointer",
-                !isExpanded && "min-h-[300px] rounded-3xl",
+                "group relative overflow-hidden cursor-pointer border border-white/10 shadow-smooth transition-all duration-500",
+                !isExpanded && "min-h-[300px] rounded-2xl hover:border-cyan-500/30",
+                !isExpanded && "shadow-[0_4px_6px_-2px_rgba(0,0,0,0.5)] hover:shadow-[0_10px_30px_-10px_rgba(0,240,255,0.3)]",
                 !isExpanded && brand.colSpan,
                 !isExpanded && (brand as any).rowSpan,
                 brand.bgStyle,

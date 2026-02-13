@@ -61,16 +61,16 @@ export function AddressForm({ formData, onChange, onValidationChange }: AddressF
             <div className="space-y-4">
                 <div className="grid gap-2">
                     <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" name="name" placeholder="John Doe" value={formData.name} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-orange/50 transition-colors" />
+                    <Input id="name" name="name" placeholder="John Doe" value={formData.name} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-core/50 transition-colors" />
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="phone">Phone Number (Lebanon)</Label>
-                    <Input id="phone" name="phone" placeholder="+961 70 123456" value={formData.phone} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-orange/50 transition-colors" />
+                    <Input id="phone" name="phone" placeholder="+961 70 123456" value={formData.phone} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-core/50 transition-colors" />
                     <p className="text-xs text-muted-foreground">We will confirm via WhatsApp/Call.</p>
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="city">City / Area</Label>
-                    <Input id="city" name="city" placeholder="Beirut, Achrafieh" value={formData.city} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-orange/50 transition-colors" />
+                    <Input id="city" name="city" placeholder="Beirut, Achrafieh" value={formData.city} onChange={onChange} required className="bg-white/5 border-white/10 focus:border-brand-core/50 transition-colors" />
                 </div>
 
                 {/* Holographic Address Field */}

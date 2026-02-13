@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Product } from "@/types";
 import { containerVariants, itemVariants } from "@/lib/motion-variants";
 import { AlertTriangle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const ProductGrid = ({ products }: { products: Product[] }) => {
     if (products.length === 0) {
@@ -40,7 +41,10 @@ export const ProductGrid = ({ products }: { products: Product[] }) => {
                         animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                         exit={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
                         transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 25 }}
-                        className="w-full"
+                        className={cn(
+                            "w-full",
+                            product.badge === "Premium" ? "md:col-span-2 md:row-span-2" : "col-span-1"
+                        )}
                     >
                         <ProductCard product={product} index={index} />
                     </motion.div>

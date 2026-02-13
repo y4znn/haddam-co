@@ -81,7 +81,7 @@ export function Header() {
                             <div className="relative">
                                 <ShoppingCart className="w-6 h-6 text-foreground" />
                                 {mounted && items.length > 0 && (
-                                    <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-orange text-[10px] font-bold text-white border border-black">
+                                    <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-core text-[10px] font-bold text-black border border-black">
                                         {items.length}
                                     </span>
                                 )}
@@ -129,10 +129,10 @@ function DockItem({ href, label, children, isActive = false }: { href: string, l
                     className={cn(
                         "flex items-center justify-center w-full h-full rounded-full bg-white/5 border border-white/5 transition-all text-white",
                         "group-hover:bg-white/10 group-hover:border-white/20 pointer-events-none",
-                        isActive ? "shadow-[0_0_15px_rgba(255,107,0,0.3)] border-brand-orange/30" : ""
+                        isActive ? "shadow-[0_0_15px_rgba(0,240,255,0.3)] border-brand-core/30" : ""
                     )}
                     style={{
-                        textShadow: isActive ? "0 0 10px rgba(255,107,0,0.5)" : "none"
+                        textShadow: isActive ? "0 0 10px rgba(0,240,255,0.5)" : "none"
                     }}
                 >
                     {children}
@@ -142,7 +142,7 @@ function DockItem({ href, label, children, isActive = false }: { href: string, l
                 {isActive && (
                     <motion.div
                         layoutId="dock-active"
-                        className="absolute -bottom-1 h-1 bg-brand-orange rounded-full shadow-neon-glow pointer-events-none"
+                        className="absolute -bottom-1 h-1 bg-brand-core rounded-full shadow-neon-glow pointer-events-none"
                         initial={{ width: 4 }}
                         animate={{ width: isHovered ? 24 : 4 }} // Evolve on hover
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}

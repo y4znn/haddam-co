@@ -53,7 +53,7 @@ export function AddToCartButton({
                 "relative overflow-hidden flex items-center justify-center gap-2 transition-all duration-300",
                 status === 'success'
                     ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-[0_0_20px_-5px_rgba(16,185,129,0.5)]"
-                    : "bg-transparent text-brand-orange shadow-[0_0_15px_-5px_var(--color-brand-orange)] hover:bg-brand-orange hover:text-black hover:shadow-[0_0_30px_var(--color-brand-orange)]",
+                    : "bg-transparent text-brand-core shadow-[0_0_15px_-5px_var(--brand-core)] hover:bg-brand-core hover:text-black hover:shadow-[0_0_30px_var(--brand-core)]",
                 className
             )}
             layout

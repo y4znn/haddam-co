@@ -81,7 +81,7 @@ export function CategoryStrip() {
                                     {isTarget && (
                                         <motion.div
                                             layoutId="activePill"
-                                            className="absolute inset-0 bg-brand-orange rounded-full z-0"
+                                            className="absolute inset-0 bg-brand-core rounded-full z-0"
                                             initial={false}
                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                         />

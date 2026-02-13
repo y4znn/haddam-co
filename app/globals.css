@@ -57,24 +57,12 @@
   --breakpoint-xl: 1100px;
 
   /* Industrial Luxury Tokens */
-  --color-brand-orange: var(--orbital-ice);
-  --color-glass-surface: var(--slate-glass);
+  --color-brand-core: var(--orbital-ice);
+  --color-brand-void: var(--deep-void);
   --color-glass-surface: var(--slate-glass);
   --color-glass-border: var(--border-glass);
 
-  /* PALETTE HIJACK: Force 'orange' classes to render as Cyan */
-  --color-orange-500: var(--orbital-ice);
-  --color-orange-600: #06b6d4;
-  /* cyan-600 equivalent */
-  --color-orange-400: #22d3ee;
-  /* cyan-400 equivalent */
 
-  /* LOGO WARMTH PURGE */
-  --color-logo-orange: var(--orbital-ice);
-  --color-logo-red: var(--reactor-purple);
-
-  --color-logo-orange: var(--orbital-ice);
-  --color-logo-red: var(--reactor-purple);
 
   --shadow-neon-glow: 0 0 40px -10px var(--orbital-ice);
   /* "Radioactive" Glow */
@@ -91,13 +79,14 @@
     --orbital-ice: #00F0FF;
     --reactor-purple: #B026FF;
     --deep-void: #050B14;
-    --slate-glass: #0F172A;
+    --slate-glass: rgba(15, 23, 42, 0.7);
     --bg-page: var(--deep-void);
     --bg-glass: var(--slate-glass);
     --border-glass: rgba(255, 255, 255, 0.1);
     --text-on-accent: #000000;
     --text-primary: #ffffff;
-    --text-muted: #a1a1aa;
+    --text-muted: #cbd5e1;
+    /* slate-300 */
 
     --background: var(--bg-page);
     --foreground: var(--text-primary);
@@ -141,7 +130,7 @@
   }
 
   *:focus-visible {
-    box-shadow: 0 0 0 2px var(--bg-page), 0 0 0 4px var(--color-brand-orange), 0 0 15px var(--color-brand-orange);
+    box-shadow: 0 0 0 2px var(--bg-page), 0 0 0 4px var(--brand-core), 0 0 15px var(--brand-core);
     outline: none;
   }
 
@@ -178,7 +167,7 @@
 
   .glass-card,
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    @apply bg-slate-900/70 backdrop-blur-xl border border-white/10;
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }

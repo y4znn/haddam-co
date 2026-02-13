@@ -88,7 +88,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             className={cn(
                 "group relative overflow-hidden rounded-2xl text-foreground transition-all duration-500 h-full flex flex-col w-full mx-auto bg-glass-surface backdrop-blur-xl border shadow-glass-double hover:-translate-y-2 will-change-transform",
                 product.badge === "Premium"
-                    ? "border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_var(--orbital-ice)]"
+                    ? "border-cyan-500/30 shadow-[0_0_30px_-5px_rgba(0,240,255,0.3)] hover:shadow-[0_0_40px_-5px_rgba(0,240,255,0.5)]"
                     : "border-glass-border hover:shadow-neon-glow"
             )}
         >

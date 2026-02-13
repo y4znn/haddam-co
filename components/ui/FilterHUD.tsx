@@ -44,13 +44,13 @@ export function FilterHUD({
 
                     {/* Search Module */}
                     <div className="relative w-full md:w-1/3 group">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-brand-orange transition-colors" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-brand-core transition-colors" />
                         <input
                             type="text"
                             placeholder="Search quantum inventory..."
                             value={filters.searchQuery}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange/50 focus:bg-white/10 transition-all font-mono text-sm"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-brand-core/50 focus:bg-white/10 transition-all font-mono text-sm"
                         />
                     </div>
 
@@ -60,17 +60,17 @@ export function FilterHUD({
                             <motion.div
                                 className={cn(
                                     "w-12 h-6 rounded-full relative transition-colors duration-300",
-                                    filters.inStockOnly ? "bg-brand-orange/20 border border-brand-orange" : "bg-white/5 border border-white/10"
+                                    filters.inStockOnly ? "bg-brand-core/20 border border-brand-core" : "bg-white/5 border border-white/10"
                                 )}
                             >
                                 <motion.div
                                     className={cn("absolute top-1 w-4 h-4 rounded-full bg-current shadow-lg")}
                                     animate={{ left: filters.inStockOnly ? "calc(100% - 20px)" : "4px" }}
                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    style={{ color: filters.inStockOnly ? "brand-orange" : "#71717a" }}
+                                    style={{ color: filters.inStockOnly ? "brand-core" : "#71717a" }}
                                 />
                             </motion.div>
-                            <span className={cn("text-xs font-bold tracking-widest uppercase transition-colors", filters.inStockOnly ? "text-brand-orange" : "text-muted-foreground")}>
+                            <span className={cn("text-xs font-bold tracking-widest uppercase transition-colors", filters.inStockOnly ? "text-brand-core" : "text-muted-foreground")}>
                                 In Stock
                             </span>
                         </div>
@@ -117,7 +117,7 @@ export function FilterHUD({
                                     className={cn(
                                         "px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] font-bold tracking-wide uppercase",
                                         filters.category === cat
-                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_var(--orbital-ice)]"
+                                            ? "bg-brand-core text-black border-brand-core shadow-[0_0_10px_var(--orbital-ice)]"
                                             : "bg-white/5 border-white/5 text-muted-foreground hover:bg-white/10"
                                     )}
                                 >
@@ -136,7 +136,7 @@ export function FilterHUD({
                                     className={cn(
                                         "px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] font-bold tracking-wide uppercase",
                                         filters.brand === brand
-                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_var(--orbital-ice)]"
+                                            ? "bg-brand-core text-black border-brand-core shadow-[0_0_10px_var(--orbital-ice)]"
                                             : "bg-white/5 border-white/5 text-muted-foreground hover:bg-white/10"
                                     )}
                                 >
@@ -157,7 +157,7 @@ export function FilterHUD({
                             step="50"
                             value={filters.priceRange[1]}
                             onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                            className="w-full h-[2px] bg-white/20 rounded-lg appearance-none cursor-pointer accent-brand-orange hover:accent-brand-orange/80"
+                            className="w-full h-[2px] bg-white/20 rounded-lg appearance-none cursor-pointer accent-brand-core hover:accent-brand-core/80"
                         />
                     </div>
                 </div>
