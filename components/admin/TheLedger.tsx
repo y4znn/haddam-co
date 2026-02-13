@@ -62,8 +62,8 @@ export function TheLedger({ orders }: TheLedgerProps) {
                         {/* Status Type */}
                         <div className="w-32 shrink-0 flex justify-end">
                             {order.payment_status === 'pending_cash' && (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-orange-500/10 text-orange-500 border border-orange-500/20 text-[10px] font-bold uppercase tracking-wide shadow-[0_0_10px_-5px_orange]">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 text-[10px] font-bold uppercase tracking-wide shadow-[0_0_10px_-5px_var(--orbital-ice)]">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
                                     COD PENDING
                                 </span>
                             )}

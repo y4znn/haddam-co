@@ -104,7 +104,7 @@ export function FilterHUD({
                                 className={cn(
                                     "px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] font-bold tracking-wide uppercase",
                                     filters.category === null
-                                        ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_#FF6B00]"
+                                        ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_var(--orbital-ice)]"
                                         : "bg-white/5 border-white/5 text-muted-foreground hover:bg-white/10"
                                 )}
                             >
@@ -117,7 +117,7 @@ export function FilterHUD({
                                     className={cn(
                                         "px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] font-bold tracking-wide uppercase",
                                         filters.category === cat
-                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_#FF6B00]"
+                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_var(--orbital-ice)]"
                                             : "bg-white/5 border-white/5 text-muted-foreground hover:bg-white/10"
                                     )}
                                 >
@@ -136,7 +136,7 @@ export function FilterHUD({
                                     className={cn(
                                         "px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] font-bold tracking-wide uppercase",
                                         filters.brand === brand
-                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_#FF6B00]"
+                                            ? "bg-brand-orange text-black border-brand-orange shadow-[0_0_10px_var(--orbital-ice)]"
                                             : "bg-white/5 border-white/5 text-muted-foreground hover:bg-white/10"
                                     )}
                                 >

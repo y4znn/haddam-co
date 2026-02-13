@@ -93,8 +93,8 @@ export function CategoryStrip() {
                                         !isTarget && "text-muted-foreground" // Apply muted-foreground only if not the target
                                     )}
                                         style={{
-                                            color: isTarget ? "#000000" : (isActive ? "#FF6B00" : undefined),
-                                            textShadow: isTarget ? "none" : (isActive ? "0 0 8px rgba(255,107,0,0.5)" : undefined)
+                                            color: isTarget ? "#000000" : (isActive ? "var(--orbital-ice)" : undefined),
+                                            textShadow: isTarget ? "none" : (isActive ? "0 0 8px var(--orbital-ice)" : undefined)
                                         }}>
                                         {cat.name}
                                     </span>

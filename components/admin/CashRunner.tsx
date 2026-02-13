@@ -32,14 +32,14 @@ export function CashRunner({ amount, currency = "USD", onClick }: CashRunnerProp
                 "relative p-6 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 group h-full flex flex-col justify-between",
                 "bg-black/40 backdrop-blur-xl border",
                 isHighRisk
-                    ? "border-amber-500/30 hover:border-amber-500/60 shadow-[0_0_30px_-10px_rgba(245,158,11,0.3)] hover:shadow-[0_0_50px_-10px_rgba(245,158,11,0.5)]"
+                    ? "border-[var(--reactor-purple)]/30 hover:border-[var(--reactor-purple)]/60 shadow-[0_0_30px_-10px_rgba(176,38,255,0.3)] hover:shadow-[0_0_50px_-10px_rgba(176,38,255,0.5)]"
                     : "border-cyan-500/30 hover:border-cyan-500/60 shadow-[0_0_30px_-10px_rgba(6,182,212,0.3)] hover:shadow-[0_0_50px_-10px_rgba(6,182,212,0.5)]"
             )}
         >
             {/* Background Glow */}
             <div className={cn(
                 "absolute -top-20 -right-20 w-64 h-64 rounded-full blur-[100px] opacity-20 transition-colors duration-700",
-                isHighRisk ? "bg-amber-500" : "bg-cyan-500"
+                isHighRisk ? "bg-[var(--reactor-purple)]" : "bg-cyan-500"
             )} />
 
             <div className="flex justify-between items-start relative z-10">
@@ -49,7 +49,7 @@ export function CashRunner({ amount, currency = "USD", onClick }: CashRunnerProp
                     </h3>
                     <div className="flex items-center gap-2">
                         {isHighRisk ? (
-                            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[var(--reactor-purple)] bg-[var(--reactor-purple)]/10 px-2 py-0.5 rounded border border-[var(--reactor-purple)]/20">
                                 <AlertTriangle className="w-3 h-3" />
                                 HIGH RISK • COLLECT NOW
                             </span>
@@ -64,7 +64,7 @@ export function CashRunner({ amount, currency = "USD", onClick }: CashRunnerProp
 
                 <div className={cn(
                     "p-3 rounded-xl border transition-colors",
-                    isHighRisk ? "bg-amber-500/10 border-amber-500/20 text-amber-500" : "bg-cyan-500/10 border-cyan-500/20 text-cyan-500"
+                    isHighRisk ? "bg-[var(--reactor-purple)]/10 border-[var(--reactor-purple)]/20 text-[var(--reactor-purple)]" : "bg-cyan-500/10 border-cyan-500/20 text-cyan-500"
                 )}>
                     <DollarSign className="w-6 h-6" />
                 </div>

@@ -74,6 +74,7 @@
   :root {
     /* "Deep Space" - Permanent Global Theme */
     --orbital-ice: #00F0FF;
+    --reactor-purple: #B026FF;
     --deep-void: #050B14;
     --slate-glass: #0F172A;
     --bg-page: var(--deep-void);
@@ -136,6 +137,20 @@
   ::selection {
     background: var(--color-brand-orange);
     color: #000000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-deep-space);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-orange);
+    border-radius: 3px;
   }
 }
 
