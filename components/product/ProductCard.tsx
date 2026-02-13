@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Product } from "@/types";
 import { AddToCartButton } from "./AddToCartButton";
 import { useUserIntent } from "@/lib/context/UserIntentContext";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface ProductCardProps {
@@ -83,10 +84,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             onMouseMove={handleMouse}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="group relative overflow-hidden rounded-2xl text-foreground transition-all duration-500 h-full flex flex-col w-full mx-auto
-            bg-glass-surface backdrop-blur-xl border border-glass-border
-            shadow-glass-double
-            hover:shadow-neon-glow hover:-translate-y-2 will-change-transform"
+            onMouseLeave={handleMouseLeave}
+            className={cn(
+                "group relative overflow-hidden rounded-2xl text-foreground transition-all duration-500 h-full flex flex-col w-full mx-auto bg-glass-surface backdrop-blur-xl border shadow-glass-double hover:-translate-y-2 will-change-transform",
+                product.badge === "Premium"
+                    ? "border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_var(--orbital-ice)]"
+                    : "border-glass-border hover:shadow-neon-glow"
+            )}
         >
             {/* Spotlight Overlay */}
             <motion.div

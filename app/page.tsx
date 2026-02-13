@@ -55,11 +55,11 @@ export default function Home() {
         className="grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[85dvh]"
       >
         {/* Top (Large): Hero/Featured Product - Spans full width now */}
-        <motion.div variants={item} whileHover="hover" className="md:col-span-3 glass-panel relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between group cursor-pointer min-h-[600px] shadow-smooth">
-          <motion.div variants={glowVariants} className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent z-0 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-50" />
+        <motion.div variants={item} whileHover="hover" className="md:col-span-3 glass-panel relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between group cursor-pointer min-h-[600px] shadow-smooth border border-cyan-400/30 hover:border-cyan-400/60 transition-colors">
+          <motion.div variants={glowVariants} className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent z-0 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050B14] via-[#0F172A] to-[#00F0FF]/10 opacity-80" />
           <div className="relative z-10">
-            <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold tracking-widest uppercase text-primary mb-4 shadow-smooth">
+            <div className="inline-flex items-center rounded-full border border-cyan-400/50 bg-cyan-950/30 px-3 py-1 text-xs font-bold tracking-widest uppercase text-cyan-400 mb-4 shadow-[0_0_10px_rgba(34,211,238,0.2)] animate-pulse">
               Featured Arrival
             </div>
             <h1 className="font-heading font-bold max-w-lg leading-tight text-white mb-4 tracking-tight drop-shadow-xl"
@@ -71,7 +71,7 @@ export default function Home() {
             </p>
             <div className="mt-8 relative z-20">
               <Link href="/products">
-                <Button size="lg" magnetic sheen className="rounded-full px-8 font-bold tracking-wide shadow-smooth cursor-pointer">
+                <Button size="lg" magnetic sheen className="rounded-full px-8 font-bold tracking-wide shadow-smooth cursor-pointer bg-cyan-500 text-black hover:shadow-[0_0_20px_#00F0FF]">
                   Shop Now <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
