@@ -57,7 +57,7 @@
   --breakpoint-xl: 1100px;
 
   /* Industrial Luxury Tokens */
-  --color-brand-orange: #FF6B00;
+  --color-brand-orange: #00F0FF;
   --color-glass-surface: var(--bg-glass);
   --color-glass-border: var(--border-glass);
 
@@ -73,9 +73,12 @@
 @layer base {
   :root {
     /* "Deep Space" - Permanent Global Theme */
-    --bg-page: #050505;
-    --bg-glass: rgba(0, 0, 0, 0.4);
+    --bg-deep-space: #050B14;
+    --bg-page: var(--bg-deep-space);
+    --surface-glass: #0F172A;
+    --bg-glass: var(--surface-glass);
     --border-glass: rgba(255, 255, 255, 0.1);
+    --text-on-accent: #000000;
     --text-primary: #ffffff;
     --text-muted: #a1a1aa;
 
@@ -121,7 +124,7 @@
   }
 
   *:focus-visible {
-    box-shadow: 0 0 0 2px var(--bg-page), 0 0 0 4px var(--color-brand-orange);
+    box-shadow: 0 0 0 2px var(--bg-page), 0 0 0 4px var(--color-brand-orange), 0 0 15px var(--color-brand-orange);
     outline: none;
   }
 
