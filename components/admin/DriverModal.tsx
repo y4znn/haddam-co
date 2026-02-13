@@ -68,7 +68,7 @@ export function DriverModal({ isOpen, onClose, drivers, totalFloatingCash }: Dri
                                                 <div className="font-bold text-white">{driver.name}</div>
                                                 <div className={cn(
                                                     "text-xs font-mono font-bold flex items-center gap-1",
-                                                    isHighBalance ? "text-amber-500" : "text-emerald-500"
+                                                    isHighBalance ? "text-[var(--reactor-purple)]" : "text-emerald-500"
                                                 )}>
                                                     ${driver.cash_balance.toLocaleString()} {isHighBalance && <AlertTriangle className="w-3 h-3" />}
                                                 </div>
@@ -84,7 +84,7 @@ export function DriverModal({ isOpen, onClose, drivers, totalFloatingCash }: Dri
                                                 variant={isHighBalance ? "solid" : "outline"}
                                                 size="sm"
                                                 className={cn(
-                                                    isHighBalance ? "bg-amber-500 hover:bg-amber-600 border-none text-black" : ""
+                                                    isHighBalance ? "bg-[var(--reactor-purple)] hover:bg-[var(--reactor-purple)]/80 border-none text-white" : ""
                                                 )}
                                             >
                                                 <MessageSquare className="w-4 h-4 mr-2" />

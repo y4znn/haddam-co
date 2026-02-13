@@ -69,6 +69,10 @@
   --color-orange-400: #22d3ee;
   /* cyan-400 equivalent */
 
+  /* LOGO WARMTH PURGE */
+  --color-logo-orange: var(--orbital-ice);
+  --color-logo-red: var(--reactor-purple);
+
   --shadow-neon-glow: 0 0 40px -10px rgba(255, 107, 0, 0.4);
   /* "Radioactive" Glow */
   --shadow-glass-edge: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
@@ -99,8 +103,8 @@
     --card-foreground: #fafafa;
     --popover: #18181b;
     --popover-foreground: #fafafa;
-    --primary: #fc542f;
-    --primary-foreground: #ffffff;
+    --primary: var(--orbital-ice);
+    --primary-foreground: #000000;
     --secondary: #2a3b55;
     --secondary-foreground: #ffffff;
     --muted: #27272a;
@@ -111,20 +115,20 @@
     --destructive-foreground: #fafafa;
     --border: #27272a;
     --input: #27272a;
-    --ring: #fc542f;
-    --chart-1: #fc542f;
+    --ring: var(--orbital-ice);
+    --chart-1: var(--orbital-ice);
     --chart-2: #2a3b55;
-    --chart-3: #e88c30;
+    --chart-3: var(--reactor-purple);
     --chart-4: #2a9d8f;
     --chart-5: #264653;
     --sidebar: #18181b;
     --sidebar-foreground: #fafafa;
-    --sidebar-primary: #fc542f;
-    --sidebar-primary-foreground: #ffffff;
+    --sidebar-primary: var(--orbital-ice);
+    --sidebar-primary-foreground: #000000;
     --sidebar-accent: #27272a;
     --sidebar-accent-foreground: #fafafa;
     --sidebar-border: #27272a;
-    --sidebar-ring: #fc542f;
+    --sidebar-ring: var(--orbital-ice);
   }
 }
 

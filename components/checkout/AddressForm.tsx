@@ -83,7 +83,7 @@ export function AddressForm({ formData, onChange, onValidationChange }: AddressF
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="text-[10px] font-mono text-amber-500 flex items-center gap-1"
+                                    className="text-[10px] font-mono text-[var(--orbital-ice)] flex items-center gap-1"
                                 >
                                     <Loader2 className="w-3 h-3 animate-spin" /> SCANNING...
                                 </motion.span>
@@ -128,7 +128,7 @@ export function AddressForm({ formData, onChange, onValidationChange }: AddressF
                                 required
                                 className={cn(
                                     "pr-10 bg-white/5 border-white/10 transition-all duration-500",
-                                    addressStatus === 'scanning' && "border-amber-500/50 shadow-[0_0_15px_-5px_var(--color-brand-orange)]",
+                                    addressStatus === 'scanning' && "border-[var(--orbital-ice)]/50 shadow-[0_0_15px_-5px_var(--orbital-ice)]",
                                     addressStatus === 'valid' && "border-emerald-500/50 shadow-[0_0_15px_-5px_#10B981]",
                                     addressStatus === 'invalid' && "border-red-500/50 shadow-[0_0_15px_-5px_#EF4444]"
                                 )}
@@ -146,7 +146,7 @@ export function AddressForm({ formData, onChange, onValidationChange }: AddressF
                                 </motion.div>
                             )}
                             {addressStatus === 'scanning' && (
-                                <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                                <div className="w-2 h-2 rounded-full bg-[var(--orbital-ice)] animate-pulse" />
                             )}
                         </div>
                     </div>
